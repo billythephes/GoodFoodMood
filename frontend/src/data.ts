@@ -39,7 +39,7 @@ export const sample_foods: Food[] = [
         name: 'Fried Potatoes',
         price: 2,
         cookTime: '15-20',
-        favorite: true,
+        favorite: false,
         origins: ['belgium', 'france'],
         stars: 3.3,
         imageUrl: 'assets/food-4.jpg',
