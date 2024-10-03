@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import { StarRatingComponent } from "../../partials/star-rating/star-rating.component";
 import { SearchComponent } from "../../partials/search/search.component";
 import { TagsComponent } from "../../partials/tags/tags.component";
+import { NotFoundComponent } from '../../partials/not-found/not-found.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterModule, CommonModule, StarRatingComponent, SearchComponent, TagsComponent],
+  imports: [RouterModule, CommonModule, StarRatingComponent, SearchComponent, TagsComponent, NotFoundComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
