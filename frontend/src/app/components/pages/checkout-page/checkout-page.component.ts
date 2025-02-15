@@ -8,6 +8,8 @@ import { TitleComponent } from "../../partials/title/title.component";
 import { TextInputComponent } from "../../partials/text-input/text-input.component";
 import { OrderItemsListComponent } from "../../partials/order-items-list/order-items-list.component";
 import { MapComponent } from "../../partials/map/map.component";
+import { OrderService } from '../../../services/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout-page',
@@ -19,7 +21,12 @@ import { MapComponent } from "../../partials/map/map.component";
 export class CheckoutPageComponent {
   order: Order = new Order();
   checkoutForm!: FormGroup;
-  constructor(cartService: CartService, private formBuilder: FormBuilder, private userService: UserService, private toastrService: ToastrService) {
+  constructor(cartService: CartService, 
+              private formBuilder: FormBuilder, 
+              private userService: UserService, 
+              private toastrService: ToastrService, 
+              private orderService: OrderService,
+              private router: Router) {
     const cart = cartService.getCart();
     this.order.items = cart.items;
     this.order.totalPrice = cart.totalPrice;
@@ -43,9 +50,21 @@ export class CheckoutPageComponent {
       return;
     }
 
+    if (!this.order.addressLatLng){
+      this.toastrService.warning('Please select your location on the map', 'Location');
+      return;
+    }
+
     this.order.name = this.fc.name.value;
     this.order.address = this.fc.address.value;
 
-    console.log(this.order);
+    this.orderService.create(this.order).subscribe({
+      next: () => {
+        this.router.navigateByUrl('/payment');
+      },
+      error: (errorResponse) => {
+        this.toastrService.error(errorResponse.error, 'Cart');
+      }
+    })
   }
 }
