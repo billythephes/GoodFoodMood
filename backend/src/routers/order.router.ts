@@ -8,8 +8,8 @@ import authMid from "../middlewares/auth.mid";
 const router = Router();
 router.use(authMid)
 
-router.post('/create',
-    asyncHander(async (req: any, res: any) => {
+router.post('/create', asyncHander(
+    async (req: any, res: any) => {
         const requestOrder = req.body;
 
         if (requestOrder.items.length <= 0){
@@ -25,7 +25,17 @@ router.post('/create',
         const newOrder = new OrderModel({...requestOrder, user: req.user.id});
         await newOrder.save();
         res.send(newOrder);
-    })
-) 
+    }
+)) 
+
+router.get('/newOrderForCurrentUser', asyncHander(
+    async (req: any, res) => {
+        const order = await OrderModel.findOne({user: req.user.id, status: OrderStatus.NEW});
+        if (order)
+            res.send(order);
+        else
+            res.status(HTTP_BAD_REQUEST).send();
+    }
+))
 
 export default router;
