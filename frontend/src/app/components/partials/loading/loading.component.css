@@ -18,12 +18,12 @@
 }
 
 img{
-    border-bottom: 7px solid brown;
+    border-bottom: 7px solid #2aa52a;
     width: 200px;
     height: 200px;
 }
 
 h1{
-    color: brown;
+    color: #2aa52a;
     text-transform: lowercase;
 }
