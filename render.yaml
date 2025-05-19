@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: goodfoodmood   
+    buildCommand: npm run build
+    publishDir: frontend/dist/frontend
+    staticPublishPath: /
+    spa: true  
