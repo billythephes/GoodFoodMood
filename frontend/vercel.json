@@ -1,0 +1,10 @@
+{
+  "buildCommand": "npm install && npm install -g @angular/cli && ng build --base-href='/'",
+  "outputDirectory": "dist/frontend",
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/assets/(.*)", "dest": "/assets/$1" },
+    { "src": "/favicon.ico", "dest": "/favicon.ico" },
+    { "src": "/[^.]+$", "dest": "/index.html", "status": 200 }
+  ]
+}
