@@ -8,6 +8,6 @@
     "dev": "cd frontend && npm start & cd backend && npm start",
     "start": "cd backend/built && node server.js",
     "prebuild": "cd backend && npm run build",
-    "build": "cd frontend && npm install && npm install -g @angular/cli && ng build"
+    "build": "cd frontend && npm install && npm install -g @angular/cli && ng build && echo '/* /index.html 200' > dist/frontend/_redirects"
   }
 }
